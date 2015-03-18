@@ -103,7 +103,6 @@ body {
     width: 240px;
     height: 34px;
     overflow: hidden;
-    background: url(../img/down_arrow_select.jpg) no-repeat right #ddd;
     border: 1px solid #ccc;
 }
 
@@ -149,6 +148,8 @@ a[data-toggle=tab] {
 
 .knobDiv {
     float: right;
+    margin-top: 30px;
+    margin-right: 120px;
 }
 
 .activated {
