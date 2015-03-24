@@ -660,7 +660,7 @@ function playAllTracks(startTime) {
 
 function setVolumeOfTrackDependingOnSliderValue(nbTrack) {
     var fraction = $("#volume" + nbTrack).val() / 100;
-    currentSong.setVolumeOfTrack(fraction * fraction, nbTrack);
+    currentSong.setVolumeOfTrack(fraction*offset[nbTrack], nbTrack);
 }
 
 function stopAllTracks() {
