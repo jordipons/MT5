@@ -1,36 +1,24 @@
-MT5 - A multitrack HTML5 Player
+MT5 modification for "Automatic music simplification: improving cochlear implants music perception" 
 ===========
-Online demo at http://mt5demo.gexsoft.com, give a look also at the user's <a href="http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/MT5%2c_multitrack_player_for_musicians">manual and documentation</a>.
+Forked from: https://github.com/squallooo/MT5. A demo online is available at http://mt5demo.gexsoft.com and also you can take a look to the author's <a href="http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/MT5%2c_multitrack_player_for_musicians">documentation</a>.
 
-MT5 is a sort of jukebox like multitrack player that has been developed for musicians who like to study a song track by track, or mute some tracks and play along it.
+This modification of MT5 adapts the original framework to be used into a research context. The aim of this extension is to use MT5's modification to study the music mixing preferences of cochlear implant recipients.
 
-In order to run it, you will need nodeJS and some node modules. Just run "npm install" to download the modules.
+Ubuntu instalation tutorial
+----------------------------------
 
-Then look at the server.js file, you may want to change the default port value. Look at lines:
+1. Install apache: sudo apt-get install apache2
+2. Install nodejs (required for MT5): sudo apt-get install nodejs
+3. Install npm: sudo apt-get install npm
+4. Download the GitHub repository.
+5. Extract and copy the files into the apache folder: /var/www/. What will lead you to have: /var/www/MT5-master/.
+6. Move to that folder: cd /var/www/MT5-master/
+7. Type to the terminal and wait: npm install
+8. Type to the terminal: nodejs server.js.
+9. Now, the server is running in local. As you can see in the output of the terminal, there is an IP:port direction (i.e.: 127.1.1.1:8081). Don't close the terminal!
+10. Go to your browser and type the IP:port direction that showed your terminal (i.e.: 127.1.1.1:8081).
+11. Enjoy!
 
-  // Config
-  var PORT = process.env.PORT,
-  TRACKS_PATH = './client/multitrack/',
-  addrIP = process.env.IP;
-
-  And change port and IP, for example, use something like:
-  // Config
-  var PORT = '8081',
-  TRACKS_PATH = './client/multitrack/',
-  addrIP = '127.0.0.1';
-
-
-Then run "npm install" and then "node server.js" and open "http://localhost:8081" on a web browser. Then select any song in the drop down menu.
-
-The multitrack songs are located in the directory assigned to TRACK_PATH, this is by default client/multitrack, and a multitrack song is just a directory with files in it, corresponding to the tracks. Just create new dir with mp3, ogg, wav files and reload the page, you will be able to play new songs.
-
-MT5 has been kept simple. It runs on any modern browser, desktop or mobile, (that means all except IE which promised web audio support for its version 12).
-
-The dirty work of managing the GUI, events, etc is done in sound.js... the main clock is in there too. We use requestAnimationFrame in order to measure time by intervals of about 1/60th of a second. Deltas are measured there in order to know "where we are in a song", and be able to jump or restart after a stop or a pause.
-
-Web audio pausing or jumping in a song is way unnatural as the AudioBufferSource nodes can be started and stopped only once. This "fire and forget" approach chosen in web audio for these particular nodes means that we need to rebuild partially the web audio graph at each pause or jump. The play/pause/jump and building of the audio graph is done in the song.js file.
-
-
-I will try to complete this documentation, do not hesitate to contact me at micbuffa at gmail dot org.
-
-There is an online demo at http://mt5demo.gexsoft.com
+Author of the modification:
+-----------------------------------
+Jordi Pons (idrojsnop@gmail.com)
