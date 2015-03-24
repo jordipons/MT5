@@ -2,7 +2,7 @@ MT5 modification for "Automatic music simplification: improving cochlear implant
 ===========
 Forked from: https://github.com/squallooo/MT5. A demo online is available at http://mt5demo.gexsoft.com and also you can take a look to the author's <a href="http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/MT5%2c_multitrack_player_for_musicians">documentation</a>.
 
-This modification of MT5 adapts the original framework to be used into a research context. The aim of this extension is to use MT5's modification to study the music mixing preferences of cochlear implant recipients.
+This modification of MT5 adapts the original framework to be used into my specific research context. The aim of this extension is to use MT5's modification to study the music mixing preferences of cochlear implant recipients.
 
 Ubuntu instalation tutorial
 ----------------------------------
