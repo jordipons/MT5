@@ -43,40 +43,37 @@
               <canvas id="waveCanvas"></canvas>
           </div>
             <div class="tab-pane fade in active" id="help">
-                <p>Version 1.0, <a href="http://miageprojet2.unice.fr/index.php?title=Intranet_de_Michel_Buffa/MT5%2C_multitrack_player_for_musicians"
-                                        target="_blank">Documentation / Manual</a></p>
-                <p><a href="https://github.com/squallooo/MT5" target="_blank">https://github.com/squallooo/MT5</a></p>
-              
-               <p>Michel Buffa, main designer</p><p>and implementer (@micbuffa)</p>
-                <p>Amine Hallili, HTML/CSS layout</p>             
+                <p>Attach some useful information!</p>
             </div>
         </div>
 	</div>
 	
+		
+
+
 		<div id="masterTools">
 		<div style="position : absolute;width : 602px;">
 			<!--<h2 style="text-align : center;">MT5, the HTML5 Multitrack player !</h2>-->
 				<br>
+<br>
 			
 			<!--VOLUME MASTER-->
 			<span id="volume">
-    			    <button id="bsound" onclick="masterMuteUnmute(this);" type="button" class="btn btn-default btn-lg master" style="margin-right: 148px;position: absolute;right: 0;margin-top: 58px;">
+    			    <button id="bsound" onclick="masterMuteUnmute(this);" type="button" class="btn btn-default btn-lg master" style="margin-right: 148px;position: absolute;right: 0;margin-top: 38px;">
                             <span class="glyphicon glyphicon-volume-up"></span>
                             </button>
     			    <input id ="masterVolume" class="knob masterVolume" data-width="100" data-height="100" data-displayInput=false value="100">
-			</span>
-
-<input id="usr" value="  ID ..." class="styled-select">
-		
+			</span>		
 
                     <button id="exportToCsv"  onclick="exportToCsv();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
-padding: 0; margin-right: 10px;position: absolute;right: 0;margin-top: 58px;">
+padding: 0; margin-right: 10px;position: absolute;right: 0;margin-top: 38px;">
                       Save
                     </button>
 			
 			<table style="margin-left: auto; margin-right: auto;">
+			<tr><td><input id="usr" value="  ID ..." class="styled-select"></td><tr>
 			    <tr><td>
-			        <button id="bplay" type="button" class="btn btn-default btn-lg" onclick="playAllTracks(0);" disabled>
+			        <button id="bplay" type="button" class="btn btn-default btn-lg" onclick="playAllTracks(0);loopSelect();" disabled>
                       <span class="glyphicon glyphicon-play"></span>
                     </button>
                     
@@ -94,7 +91,7 @@ padding: 0; margin-right: 10px;position: absolute;right: 0;margin-top: 58px;">
 padding: 0;" disabled>Record mix
                     </button>
 			    </td></tr>
-			    <tr><td id="loopBox">
+			   <!-- <tr><td id="loopBox">
 			        <button id="loopStart" onclick="setLoopStart();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0;" disabled>
                       Start Loop
@@ -119,7 +116,7 @@ padding: 0;" disabled>
                     </button>
 
 
-			    </td></tr>
+			    </td></tr>-->
 			    <tr><td>
 			        <div id="songs" class="styled-select"></div>
 			        <br/>
@@ -150,33 +147,29 @@ padding: 0;" disabled>
         
 <br><br><br>
 
-<p style="color:red" id="vol0"></p>
+<!--<p style="color:red" id="vol0"></p>
 <p style="color:red" id="vol1"></p>
 <p style="color:red" id="vol2"></p>
-<p style="color:red" id="vol3"></p>
 
 <p style="color:red" id="offset0"></p>
 <p style="color:red" id="offset1"></p>
-<p style="color:red" id="offset2"></p>
-<p style="color:red" id="offset3"></p>
+<p style="color:red" id="offset2"></p>-->
 
 <script>
     function exportToCsv() {
 		var vol0=document.getElementById("volume0").value/100;
-		document.getElementById("vol0").innerHTML = vol0;
+		//document.getElementById("vol0").innerHTML = vol0;
 		var vol1=document.getElementById("volume1").value/100;
-		document.getElementById("vol1").innerHTML = vol1;
+		//document.getElementById("vol1").innerHTML = vol1;
 		var vol2=document.getElementById("volume2").value/100;
-		document.getElementById("vol2").innerHTML = vol2;
-		var vol3=document.getElementById("volume3").value/100;
-		document.getElementById("vol3").innerHTML = vol3;
+		//document.getElementById("vol2").innerHTML = vol2;
 	    var usr_id = document.getElementById("usr").value;
 		var d = new Date();
 
-        var myCsv = "UserID,TimeStamp,Song,SliderBass,SliderDrums,SliderMelody,SliderOther,OffsetBass,OffsetDrums,OffsetMelody,OffsetOther,\n"+usr_id+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+vol3+","+offset[0]+","+offset[1]+","+offset[2]+","+offset[3];
+        var myCsv = "UserID,TimeStamp,Song,SliderMelody,SliderBassDrums,SliderHarmonic,OffsetMelody,OffsetBassDrums,OffsetHarmonicr\n"+usr_id+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+offset[0]+","+offset[1]+","+offset[2];
 
         window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
-	window.alert("Gains configuration saved correctly!\n\nVolume 0: "+vol0+"\nVolume 1: "+vol1+"\nVolume 2: "+vol2+"\nVolume 3: "+vol3);
+	window.alert("Gains configuration saved correctly!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]);
     }
 </script>
 
@@ -214,11 +207,9 @@ function myInit(){
 	offset[0]=Math.pow(10,(offset[0]/20));
 	offset[1]=Math.pow(10,(offset[1]/20));
 	offset[2]=Math.pow(10,(offset[2]/20));
-	offset[3]=Math.pow(10,(offset[3]/20));
-	document.getElementById("offset0").innerHTML = offset[0];//Math.pow(10,(offset[1]/20));
-	document.getElementById("offset1").innerHTML = offset[1];//Math.pow(10,(offset[1]/20));
-	document.getElementById("offset2").innerHTML = offset[2];//Math.pow(10,(offset[1]/20));
-	document.getElementById("offset3").innerHTML = offset[3];//Math.pow(10,(offset[1]/20));
+	//document.getElementById("offset0").innerHTML = offset[0];//Math.pow(10,(offset[1]/20));
+	//document.getElementById("offset1").innerHTML = offset[1];//Math.pow(10,(offset[1]/20));
+	//document.getElementById("offset2").innerHTML = offset[2];//Math.pow(10,(offset[1]/20));
 
 	init();
 }
