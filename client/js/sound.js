@@ -284,7 +284,7 @@ function finishedLoading(bufferList) {
         // set volume gain of track i to max (1)
         //currentSong.setVolumeOfTrack(1, i);
         $(".volumeSlider").each(function (obj, value) {
-            obj.value = 100;
+            obj.value = 60;
         });
     }
 }
@@ -370,7 +370,7 @@ function loadSong(songName) {
                 //"<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
                 //"<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button>
 "<td width=80%>" +
-                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='0' max = '100' value='0' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
+                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='-70' max = '30' value='-70' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
 
             divTrack.appendChild(span);
 
@@ -511,10 +511,10 @@ function showWelcomeMessage() {
     View.frontCanvasContext.save();
     View.frontCanvasContext.font = '14pt Arial';
     View.frontCanvasContext.fillStyle = 'white';
-    View.frontCanvasContext.fillText('Welcome to MT5, start by choosing a song ', 50, 200);
-    View.frontCanvasContext.fillText('in this drop down menu! ', 50, 220);
-    View.frontCanvasContext.fillText('Documentation and HowTo in the ', 315, 100);
-    View.frontCanvasContext.fillText('first link of the Help tab there! ', 315, 120);
+    View.frontCanvasContext.fillText('Second, put your name in the ID box and then', 50, 200);
+    View.frontCanvasContext.fillText('choose an experiment in the drop down menu! ', 50, 220);
+    View.frontCanvasContext.fillText('First: read the task that ', 315, 100);
+    View.frontCanvasContext.fillText('is defined in red at the black box! ', 315, 120);
 
     // Draws an arrow in direction of the drop down menu
     // x1, y1, x2, y2, width of arrow, color
@@ -659,8 +659,11 @@ function playAllTracks(startTime) {
 }
 
 function setVolumeOfTrackDependingOnSliderValue(nbTrack) {
-    var fraction = $("#volume" + nbTrack).val() / 100;
-    currentSong.setVolumeOfTrack(fraction*offset[nbTrack], nbTrack);
+    var fraction = $("#volume" + nbTrack).val();
+    console.log("SLIDER = " + fraction);
+    console.log("OFFSET = " + offset[nbTrack]);
+
+    currentSong.setVolumeOfTrack(Math.pow(10,(fraction/20))*Math.pow(10,(offset[nbTrack]/20)), nbTrack);
 }
 
 function stopAllTracks() {

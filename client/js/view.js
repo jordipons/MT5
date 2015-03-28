@@ -58,12 +58,13 @@ function View() {
     this.appendTrack = function (trackNumber, instrumentName, SAMPLE_HEIGHT) {
         var tr = document.createElement("tr");
 
-        tr.innerHTML = '<td class="trackBox" style="height : ' + SAMPLE_HEIGHT + 'px">' +
-            "<progress class='pisteProgress' id='progress" + trackNumber + "' value='0' max='100' style='width : " + SAMPLE_HEIGHT + "px' ></progress>" +
-            instrumentName + '<div style="float : right;">' +
-            "<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
-            "<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button></div>" +
-            "<span id='volspan'><input type='range' class = 'volumeSlider' id='volume" + trackNumber + "' min='0' max = '100' value='100' onchange='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span><td>";
+        tr.innerHTML = '<td class="trackBox" style="height : ' + SAMPLE_HEIGHT + 'px"><table width=100%><tr><td width=40%><center>' +
+            //"<progress class='pisteProgress' id='progress" + trackNumber + "' value='0' max='100' style='width : " + SAMPLE_HEIGHT + "px' ></progress>" +
+            instrumentName + '</center></td>' +
+            //"<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
+            //"<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button></div>" +
+"<td width=80%>" +
+            "<span id='volspan'><input type='range' class = 'volumeSlider' id='volume" + trackNumber + "' min='-70' max = '30' value='-70' onchange='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
 
         this.tracks.appendChild(tr);
     }

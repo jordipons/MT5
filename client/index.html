@@ -43,7 +43,8 @@
               <canvas id="waveCanvas"></canvas>
           </div>
             <div class="tab-pane fade in active" id="help">
-                <p>Attach some useful information!</p>
+<br>
+                <h4>Task:</h4><h4 style="color:red">Adjust the volumes so that the resulting mix sounds best for you.</h4>
             </div>
         </div>
 	</div>
@@ -157,11 +158,11 @@ padding: 0;" disabled>
 
 <script>
     function exportToCsv() {
-		var vol0=document.getElementById("volume0").value/100;
+		var vol0=document.getElementById("volume0").value;
 		//document.getElementById("vol0").innerHTML = vol0;
-		var vol1=document.getElementById("volume1").value/100;
+		var vol1=document.getElementById("volume1").value;
 		//document.getElementById("vol1").innerHTML = vol1;
-		var vol2=document.getElementById("volume2").value/100;
+		var vol2=document.getElementById("volume2").value;
 		//document.getElementById("vol2").innerHTML = vol2;
 	    var usr_id = document.getElementById("usr").value;
 		var d = new Date();
@@ -202,11 +203,11 @@ function INITsetLoopEnd() {
 function myInit(){
 	offset = [];
 	for (var i = 0, l = 4; i < l; i++) {
-		offset.push(Math.random() * -8);
+		offset.push(Math.round(Math.random() * -30));
 	}
-	offset[0]=Math.pow(10,(offset[0]/20));
-	offset[1]=Math.pow(10,(offset[1]/20));
-	offset[2]=Math.pow(10,(offset[2]/20));
+	//offset[0]=Math.pow(10,(offset[0]/20));
+	//offset[1]=Math.pow(10,(offset[1]/20));
+	//offset[2]=Math.pow(10,(offset[2]/20));
 	//document.getElementById("offset0").innerHTML = offset[0];//Math.pow(10,(offset[1]/20));
 	//document.getElementById("offset1").innerHTML = offset[1];//Math.pow(10,(offset[1]/20));
 	//document.getElementById("offset2").innerHTML = offset[2];//Math.pow(10,(offset[1]/20));
