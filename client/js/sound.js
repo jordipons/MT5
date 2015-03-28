@@ -284,7 +284,7 @@ function finishedLoading(bufferList) {
         // set volume gain of track i to max (1)
         //currentSong.setVolumeOfTrack(1, i);
         $(".volumeSlider").each(function (obj, value) {
-            obj.value = 60;
+            obj.value = 30;
         });
     }
 }
