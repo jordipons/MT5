@@ -44,7 +44,7 @@
           </div>
             <div class="tab-pane fade in active" id="help">
 <br>
-                <h4>Task:</h4><h4 style="color:red">Adjust the volumes so that the resulting mix sounds best for you.</h4>
+                <h4>Task:</h4><h4 style="color:red">Determine the most enjoyable audio mix by adjusting the gains of the mixing console.</h4>
             </div>
         </div>
 	</div>
@@ -66,13 +66,14 @@
     			    <input id ="masterVolume" class="knob masterVolume" data-width="100" data-height="100" data-displayInput=false value="100">
 			</span>		
 
-                    <button id="exportToCsv"  onclick="exportToCsv();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+                    <button id="exportToCsv"  onclick="saveAction();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0; margin-right: 10px;position: absolute;right: 0;margin-top: 38px;">
-                      Save
+                      Save & Next
                     </button>
 			
 			<table style="margin-left: auto; margin-right: auto;">
-			<tr><td><input id="usr" value="  ID ..." class="styled-select"></td><tr>
+			<!--<tr><td><input id="usr" value="  ID ..." class="styled-select"></td><tr>-->
+			<tr><td><div id="songs" class="styled-select" style="margin-left: 16px;"></div></td><tr>                    
 			    <tr><td>
 			        <button id="bplay" type="button" class="btn btn-default btn-lg" onclick="playAllTracks(0);loopSelect();" disabled>
                       <span class="glyphicon glyphicon-play"></span>
@@ -119,7 +120,31 @@ padding: 0;" disabled>
 
 			    </td></tr>-->
 			    <tr><td>
-			        <div id="songs" class="styled-select"></div>
+ <button onclick="indexLoadSong(5);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      Pop 2ch.
+ </button>
+ <button onclick="indexLoadSong(15);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      Pop 3ch.
+ </button>
+ <button onclick="indexLoadSong(25);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      Classic 2ch.
+ </button>
+ <button onclick="indexLoadSong(35);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      Classic 3ch.
+ </button>
+ <button onclick="startTrain();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      TRAIN
+ </button>
+ <button onclick="startTest();" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+padding: 0;">
+                      START TEST
+ </button>
+
 			        <br/>
 			    </td></tr>
 			</table>
@@ -156,6 +181,38 @@ padding: 0;" disabled>
 <p style="color:red" id="offset1"></p>
 <p style="color:red" id="offset2"></p>-->
 
+<p style="color:red" id="repetition"></p>
+<!--<p style="color:red" id="ch"></p>-->
+
+<script>
+function saveAction() {
+	console.log("Repetition saveAction(): "  + repetition);
+	if (repetition > 0) {
+	exportToCsv();
+	console.log("HA ENTRAT 10");
+	repetition=repetition+1;
+	indexLoadSong(repetition)
+	document.getElementById("repetition").innerHTML = repetition+"/40";
+	} else if (repetition < -1) {
+	stopAllTracks();
+	exportToCsv();
+	console.log("HA ENTRAT -10");
+	repetition=repetition-1;
+	indexLoadSong(repetition)
+	document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
+	} else {
+	stopAllTracks();
+	console.log("HA ENTRAT ELSE");
+	exportToCsv();
+	}
+	console.log("Repetition: "  + repetition);
+	randOffset()
+
+	
+}
+
+</script>
+
 <script>
     function exportToCsv() {
 		var vol0=document.getElementById("volume0").value;
@@ -164,13 +221,16 @@ padding: 0;" disabled>
 		//document.getElementById("vol1").innerHTML = vol1;
 		var vol2=document.getElementById("volume2").value;
 		//document.getElementById("vol2").innerHTML = vol2;
-	    var usr_id = document.getElementById("usr").value;
+	    var usr_id = "JORDI"; // INTRODUCE THE USER HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		var d = new Date();
 
-        var myCsv = "UserID,TimeStamp,Song,SliderMelody,SliderBassDrums,SliderHarmonic,OffsetMelody,OffsetBassDrums,OffsetHarmonicr\n"+usr_id+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+offset[0]+","+offset[1]+","+offset[2];
-
+        var myCsv = "UserID,TimeStamp,Song,SliderMelody,SliderBassDrums,SliderHarmonic,OffsetMelody,OffsetBassDrums,OffsetHarmonicr,repetition,numChannels\n"+usr_id+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+offset[0]+","+offset[1]+","+offset[2]+","+repetition+","+2;
+	console.log("FFFFFFFFFFFFFFFFFUUUUUUU");	
+	if (repetition > 0) {
         window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
 	window.alert("Gains configuration saved correctly!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]);
+	} else {
+	window.alert("Gains configuration NOT saved!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]);}
     }
 </script>
 
@@ -200,21 +260,72 @@ function INITsetLoopEnd() {
 </script>
 
 <script>
+function startTest(){
+	repetition=1;
+	document.getElementById("repetition").innerHTML = repetition+"/40";
+	console.log("Repetition: "  + repetition);
+	randOffset()
+	indexLoadSong(repetition)
+}
+</script>
+
+<script>
+function startTrain(){
+	repetition=-2;
+	document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
+	console.log("Repetition: "  + repetition);
+	randOffset()
+	indexLoadSong(repetition)
+}
+</script>
+
+<script>
 function myInit(){
+	randOffset();
+	repetition=-1;
+	init();
+}
+</script>
+
+<script>
+function randOffset(){
 	offset = [];
 	for (var i = 0, l = 4; i < l; i++) {
 		offset.push(Math.round(Math.random() * -30));
 	}
-	//offset[0]=Math.pow(10,(offset[0]/20));
-	//offset[1]=Math.pow(10,(offset[1]/20));
-	//offset[2]=Math.pow(10,(offset[2]/20));
-	//document.getElementById("offset0").innerHTML = offset[0];//Math.pow(10,(offset[1]/20));
-	//document.getElementById("offset1").innerHTML = offset[1];//Math.pow(10,(offset[1]/20));
-	//document.getElementById("offset2").innerHTML = offset[2];//Math.pow(10,(offset[1]/20));
-
-	init();
 }
 </script>
+
+<script>
+function indexLoadSong(ind){
+console.log("Repetition indexLoadSong(): "  + repetition);
+if (ind>0 && ind<=10) {
+loadSong("EXP1 POP");
+} else if (ind>10 && ind<=20) {
+loadSong("Hey Jude");
+} else if (ind>20 && ind<=30) {
+loadSong("EXP1 CLASSICAL");
+} else if (ind>30 && ind<=40) {
+loadSong("EXP1 CLASSICAL");
+} else if (ind == -2) {
+loadSong("EXP1 POP");
+} else if (ind == -3) {
+loadSong("Hey Jude");
+} else if (ind == -4) {
+loadSong("EXP1 CLASSICAL");
+} else if (ind == -5) {
+loadSong("EXP1 CLASSICAL");
+} else {
+ window.alert("You have finished!");
+ $(location).attr('href',"http://0.0.0.0:3000/");
+}
+View.activeConsoleTab();
+setTimeout(function () {playAllTracks(0);loopSelect();}, 500);
+//var nbTracks = currentSong.tracks.length;
+//document.getElementById("ch").innerHTML = nbTracks;
+}
+</script>
+
 
     </body>
 </html>
