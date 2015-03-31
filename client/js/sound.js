@@ -284,9 +284,11 @@ function finishedLoading(bufferList) {
         // set volume gain of track i to max (1)
         //currentSong.setVolumeOfTrack(1, i);
         $(".volumeSlider").each(function (obj, value) {
-            obj.value = 30;
+            obj.value = -10;
         });
     }
+    // ADDED BY JORDI PONS
+    setTimeout(function(){loopSelect();playAllTracks(0);nbTracks = currentSong.tracks.length;},200)
 }
 
 
@@ -370,7 +372,7 @@ function loadSong(songName) {
                 //"<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
                 //"<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button>
 "<td width=80%>" +
-                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='-70' max = '30' value='-70' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
+                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='-70' max = '-10' value='-70' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
 
             divTrack.appendChild(span);
 
@@ -388,7 +390,6 @@ function loadSong(songName) {
         loadAllSoundSamples();
     };
     xhr.send();
-    //return song.instruments.length
 }
 
 function getMousePos(canvas, evt) {

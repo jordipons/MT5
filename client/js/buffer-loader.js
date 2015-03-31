@@ -75,4 +75,8 @@ BufferLoader.prototype.load = function () {
   console.log("BufferLoader.prototype.load urlList size = " + this.urlList.length);
   for (var i = 0; i < this.urlList.length; ++i)
     this.loadBuffer(this.urlList[i], i);
+	// ADDED BY JORDI PONS
+	playAllTracks(0);
+	loopSelect();
+	nbTracks = currentSong.tracks.length;document.getElementById("ch").innerHTML = nbTracks;
 };

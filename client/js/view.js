@@ -64,7 +64,7 @@ function View() {
             //"<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
             //"<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button></div>" +
 "<td width=80%>" +
-            "<span id='volspan'><input type='range' class = 'volumeSlider' id='volume" + trackNumber + "' min='-70' max = '30' value='-70' onchange='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
+            "<span id='volspan'><input type='range' class = 'volumeSlider' id='volume" + trackNumber + "' min='-70' max = '-10' value='-70' onchange='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
 
         this.tracks.appendChild(tr);
     }

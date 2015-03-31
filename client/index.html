@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-        <title>Music Perception</title>
-        <ascript src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></ascript>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/view.js"></script>
-        <script src="js/waveformDrawer.js"></script>
-        <script src="js/track.js"></script>
-        <script src="js/song.js"></script>
-        <script src="js/buffer-loader.js"></script>
-        <script src="js/sound.js"></script>
-        <script src="js/jquery.knob.js"></script>
-        <script src="js/knob.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="js/canvasArrows.js"></script>
-        <script src="js/range-touch.js"></script>
-        <script src="js/recorderjs/recorder.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<title>Music Perception</title>
+	<ascript src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></ascript>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/view.js"></script>
+	<script src="js/waveformDrawer.js"></script>
+	<script src="js/track.js"></script>
+	<script src="js/song.js"></script>
+	<script src="js/buffer-loader.js"></script>
+	<script src="js/sound.js"></script>
+	<script src="js/jquery.knob.js"></script>
+	<script src="js/knob.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/canvasArrows.js"></script>
+	<script src="js/range-touch.js"></script>
+	<script src="js/recorderjs/recorder.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
-    </head>
-    <body onload="myInit();">
+</head>
+<body onload="myInit();">
 	
 	<div id="app">
 	
@@ -75,7 +75,7 @@ padding: 0; margin-right: 10px;position: absolute;right: 0;margin-top: 38px;">
 			<!--<tr><td><input id="usr" value="  ID ..." class="styled-select"></td><tr>-->
 			<tr><td><div id="songs" class="styled-select" style="margin-left: 16px;"></div></td><tr>                    
 			    <tr><td>
-			        <button id="bplay" type="button" class="btn btn-default btn-lg" onclick="playAllTracks(0);loopSelect();" disabled>
+			        <button id="bplay" type="button" class="btn btn-default btn-lg" onclick="playAllTracks(0);" disabled>
                       <span class="glyphicon glyphicon-play"></span>
                     </button>
                     
@@ -120,19 +120,19 @@ padding: 0;" disabled>
 
 			    </td></tr>-->
 			    <tr><td>
- <button onclick="indexLoadSong(5);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+ <button onclick="indexLoadSong(5);document.getElementById('repetition').innerHTML = '';" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0;">
                       Pop 2ch.
  </button>
- <button onclick="indexLoadSong(15);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+ <button onclick="indexLoadSong(15);document.getElementById('repetition').innerHTML = '';" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0;">
                       Pop 3ch.
  </button>
- <button onclick="indexLoadSong(25);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+ <button onclick="indexLoadSong(25);document.getElementById('repetition').innerHTML = '';" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0;">
                       Classic 2ch.
  </button>
- <button onclick="indexLoadSong(35);" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
+ <button onclick="indexLoadSong(35);document.getElementById('repetition').innerHTML = '';" type="button" class="btn btn-default btn-lg" style="font-size: 10px;
 padding: 0;">
                       Classic 3ch.
  </button>
@@ -173,159 +173,138 @@ padding: 0;">
         
 <br><br><br>
 
-<!--<p style="color:red" id="vol0"></p>
-<p style="color:red" id="vol1"></p>
-<p style="color:red" id="vol2"></p>
-
-<p style="color:red" id="offset0"></p>
-<p style="color:red" id="offset1"></p>
-<p style="color:red" id="offset2"></p>-->
-
 <p style="color:red" id="repetition"></p>
-<!--<p style="color:red" id="ch"></p>-->
 
 <script>
-function saveAction() {
-	console.log("Repetition saveAction(): "  + repetition);
-	if (repetition > 0) {
-	exportToCsv();
-	console.log("HA ENTRAT 10");
-	repetition=repetition+1;
-	indexLoadSong(repetition)
-	document.getElementById("repetition").innerHTML = repetition+"/40";
-	} else if (repetition < -1) {
-	stopAllTracks();
-	exportToCsv();
-	console.log("HA ENTRAT -10");
-	repetition=repetition-1;
-	indexLoadSong(repetition)
-	document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
-	} else {
-	stopAllTracks();
-	console.log("HA ENTRAT ELSE");
-	exportToCsv();
+	function saveAction() { // When pushing the Save & Next botton, what happens?
+		console.log("Repetition saveAction(): "  + repetition);
+		if (repetition > 0) {
+			exportToCsv();
+			console.log("TEST Mode");
+			repetition=repetition+1;
+			indexLoadSong(repetition)
+			document.getElementById("repetition").innerHTML = repetition+"/40";
+		} else if (repetition < -1) {
+			stopAllTracks();
+			exportToCsv();
+			console.log("TRAIN Mode");
+			repetition=repetition-1;
+			indexLoadSong(repetition)
+			document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
+		} else {
+			stopAllTracks();
+			console.log("AllSTOP Mode");
+			document.getElementById('repetition').innerHTML = "";
+			exportToCsv();
+		}
+		console.log("Repetition: "  + repetition);
+		randOffset()
 	}
-	console.log("Repetition: "  + repetition);
-	randOffset()
 
-	
-}
+	function indexLoadSong(ind){ // Choosing the songs in each case: POSITIVE VALUES - TEST / NEGATIVE VALUES - TRAIN
+		console.log("Repetition indexLoadSong(): "  + repetition);
+		if (ind>0 && ind<=10) {
+			loadSong("EXP1 POP 2");
+		} else if (ind>10 && ind<=20) {
+			loadSong("EXP1 POP 3");
+		} else if (ind>20 && ind<=30) {
+			loadSong("EXP1 CLASSICAL 2");
+		} else if (ind>30 && ind<=40) {
+			loadSong("EXP1 CLASSICAL 3");
+		} else if (ind == -2) {
+			loadSong("EXP1 POP 2");
+		} else if (ind == -3) {
+			loadSong("EXP1 POP 3");
+		} else if (ind == -4) {
+			loadSong("EXP1 CLASSICAL 2");
+		} else if (ind == -5) {
+			loadSong("EXP1 CLASSICAL 3");
+		} else {
+		 	document.getElementById('repetition').innerHTML = '';
+		 	window.alert("You have finished!");
+		 	$(location).attr('href',"http://0.0.0.0:3000/");
+		}
+		View.activeConsoleTab();
+	}
 
-</script>
-
-<script>
-    function exportToCsv() {
+	function exportToCsv() { // Save all data generated by this experiment
+		var usr_id = 0;							// INTRODUCE THE USER HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		var usr_name = "Jordi Pons"; 					// INTRODUCE THE USER HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		var vol0=document.getElementById("volume0").value;
-		//document.getElementById("vol0").innerHTML = vol0;
 		var vol1=document.getElementById("volume1").value;
-		//document.getElementById("vol1").innerHTML = vol1;
-		var vol2=document.getElementById("volume2").value;
-		//document.getElementById("vol2").innerHTML = vol2;
-	    var usr_id = "JORDI"; // INTRODUCE THE USER HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (nbTracks>2){
+			var vol2=document.getElementById("volume2").value;
+		} else {
+			var vol2=100000000;		
+		}
 		var d = new Date();
 
-        var myCsv = "UserID,TimeStamp,Song,SliderMelody,SliderBassDrums,SliderHarmonic,OffsetMelody,OffsetBassDrums,OffsetHarmonicr,repetition,numChannels\n"+usr_id+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+offset[0]+","+offset[1]+","+offset[2]+","+repetition+","+2;
-	console.log("FFFFFFFFFFFFFFFFFUUUUUUU");	
-	if (repetition > 0) {
-        window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
-	window.alert("Gains configuration saved correctly!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]);
-	} else {
-	window.alert("Gains configuration NOT saved!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]);}
-    }
-</script>
+		var myCsv = "UserID,UserName,INITtimeStamp,TimeStamp,Song,SliderMelody,SliderBassDrums,SliderHarmonic,OffsetMelody,OffsetBassDrums,OffsetHarmonicr,repetition,numChannels\n"+usr_id+","+usr_name+","+d_init+","+d+","+currentSong.name+","+vol0+","+vol1+","+vol2+","+offset[0]+","+offset[1]+","+offset[2]+","+repetition+","+nbTracks;
 
-<script>
-function loopSelect() {
-INITsetLoopStart();
-INITsetLoopEnd();
-loopOnOff();
-}
 
-</script>
-
-<script>
-function INITsetLoopStart() {
-        selectionForLoop.xStart = 1;
-        // Switch xStart and xEnd if necessary, compute width of selection
-        adjustSelectionMarkers();
-}
-</script>
-
-<script>
-function INITsetLoopEnd() {
-        selectionForLoop.xEnd = ((window.View.masterCanvas.width)-1);//currentSong.decodedAudioBuffers[0].length; ;
-        // Switch xStart and xEnd if necessary, compute width of selection
-        adjustSelectionMarkers();
-}
-</script>
-
-<script>
-function startTest(){
-	repetition=1;
-	document.getElementById("repetition").innerHTML = repetition+"/40";
-	console.log("Repetition: "  + repetition);
-	randOffset()
-	indexLoadSong(repetition)
-}
-</script>
-
-<script>
-function startTrain(){
-	repetition=-2;
-	document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
-	console.log("Repetition: "  + repetition);
-	randOffset()
-	indexLoadSong(repetition)
-}
-</script>
-
-<script>
-function myInit(){
-	randOffset();
-	repetition=-1;
-	init();
-}
-</script>
-
-<script>
-function randOffset(){
-	offset = [];
-	for (var i = 0, l = 4; i < l; i++) {
-		offset.push(Math.round(Math.random() * -30));
+		if (repetition > 0) {
+			window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
+			window.alert("Gains configuration saved correctly!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]+"\n\nUserID: "+usr_id+"\nUser: "+usr_name+"\nINITdate: "+d_init+"\nDate: "+d+"\nRepetition:"+repetition+"\n\nSong: "+currentSong.name+"\n# tracks: "+nbTracks);
+		} else {
+			console.log("ARRIBA -1")
+			window.alert("Gains configuration NOT saved!\n\nSliderMelody: "+vol0+"\nSliderBassDrums: "+vol1+"\nSliderHarmonic: "+vol2+"\n\nOffsetMelody: "+offset[0]+"\nOffsetBassDrums: "+offset[1]+"\nOffsetHarmonic: "+offset[2]+"\n\nUserID: "+usr_id+"\nUser: "+usr_name+"\nINITdate: "+d_init+"\nDate: "+d+"\nRepetition:"+repetition+"\n\nSong: "+currentSong.name+"\n# tracks: "+nbTracks);
+		}
 	}
-}
+
+	function startTest(){
+		repetition=1;
+		document.getElementById("repetition").innerHTML = repetition+"/40";
+		console.log("Repetition: "  + repetition);
+		randOffset()
+		d_init = new Date();
+		indexLoadSong(repetition)
+	}
+
+	function startTrain(){
+		repetition=-2;
+		document.getElementById("repetition").innerHTML = ((-1*repetition)-1)+"/4";
+		console.log("Repetition: "  + repetition);
+		randOffset()
+		d_init = new Date();
+		indexLoadSong(repetition)
+	}
+
+	function myInit(){
+		randOffset();
+		repetition=-1;
+		d_init = new Date();
+		init();
+	}
+
+	function randOffset(){
+		offset = [];
+		for (var i = 0, l = 4; i < l; i++) {
+			offset.push(Math.round(Math.random() * -50));
+		}
+	}
+
+	function loopSelect() {
+		INITsetLoopStart();
+		INITsetLoopEnd();
+		loopOnOff();
+	}
+
+	function INITsetLoopStart() {
+		    selectionForLoop.xStart = 1;
+		    adjustSelectionMarkers();
+	}
+
+	function INITsetLoopEnd() {
+		    selectionForLoop.xEnd = ((window.View.masterCanvas.width)-1);
+		    adjustSelectionMarkers();
+	}
+
+// INFORMATION not saved in the csv:
+// ALWAYS in TEST MODE, because in TRAIN MODE the data is not saved.
+
+// IDEAS: save number of clicks? I think is correlated to the duration.
+
 </script>
 
-<script>
-function indexLoadSong(ind){
-console.log("Repetition indexLoadSong(): "  + repetition);
-if (ind>0 && ind<=10) {
-loadSong("EXP1 POP");
-} else if (ind>10 && ind<=20) {
-loadSong("Hey Jude");
-} else if (ind>20 && ind<=30) {
-loadSong("EXP1 CLASSICAL");
-} else if (ind>30 && ind<=40) {
-loadSong("EXP1 CLASSICAL");
-} else if (ind == -2) {
-loadSong("EXP1 POP");
-} else if (ind == -3) {
-loadSong("Hey Jude");
-} else if (ind == -4) {
-loadSong("EXP1 CLASSICAL");
-} else if (ind == -5) {
-loadSong("EXP1 CLASSICAL");
-} else {
- window.alert("You have finished!");
- $(location).attr('href',"http://0.0.0.0:3000/");
-}
-View.activeConsoleTab();
-setTimeout(function () {playAllTracks(0);loopSelect();}, 500);
-//var nbTracks = currentSong.tracks.length;
-//document.getElementById("ch").innerHTML = nbTracks;
-}
-</script>
-
-
-    </body>
+</body>
 </html>
