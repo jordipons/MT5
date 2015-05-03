@@ -178,6 +178,7 @@ padding: 0;">
 <script>
 	function saveAction() { // When pushing the Save & Next botton, what happens?
 		console.log("Repetition saveAction(): "  + repetition);
+		stopAllTracks();
 		if (repetition > 0) {
 			exportToCsv();
 			console.log("TEST Mode");
@@ -186,7 +187,7 @@ padding: 0;">
 			console.log("Random now: "  + rand_order[repetition-1]);
 			repetition=repetition+1;
 			indexLoadSong(rand_order[repetition-1]) ////////////////////////////////////////////// POSAR RANDOM.
-			document.getElementById("repetition").innerHTML = repetition+"/40";
+			document.getElementById("repetition").innerHTML = repetition+"/80";
 		} else if (repetition < -1) {
 			stopAllTracks();
 			exportToCsv();
@@ -214,7 +215,14 @@ padding: 0;">
 			loadSong("EXP1 CLASSICAL 2");
 		} else if (ind>30 && ind<=40) {
 			loadSong("EXP1 CLASSICAL 3");
-		
+		} else if (ind>40 && ind<=50) {
+			loadSong("0POP2");
+		} else if (ind>50 && ind<=60) {
+			loadSong("0POP3");	
+		} else if (ind>60 && ind<=70) {
+			loadSong("0CL2");
+		} else if (ind>70 && ind<=80) {
+			loadSong("0CL3");	
 		//if (ind>0 && ind<=40) {
 			
 		//	loadSong("EXP1 CLASSICAL 3");
@@ -261,7 +269,7 @@ padding: 0;">
 
 	function startTest(){
 		repetition=1;
-		document.getElementById("repetition").innerHTML = repetition+"/40";
+		document.getElementById("repetition").innerHTML = repetition+"/80";
 		console.log("Repetition: "  + repetition);
 		randOffset()
 		d_init = new Date();
@@ -283,7 +291,7 @@ padding: 0;">
 		randOffset();
 		repetition=-1;
 		numbers = [];
-		for (var i = 1; i != 41; ++i) numbers.push(i)
+		for (var i = 1; i != 81; ++i) numbers.push(i)
 		console.log("Numbers: "  + numbers);
 		rand_order = shuffle(numbers);
 		console.log("Random: "  + rand_order);

@@ -3,7 +3,7 @@
 
 clc;clear all;close all;
 
-csvPath='./csv/';
+csvPath='./csv/JordiSunday/';
 
 % ERROR CODE: 100000000
 error_code=100000000;
@@ -24,7 +24,26 @@ num_csvFiles=size(csvFiles,1);
 relBassDrums=[];
 relMelody=[];
 relHarmonic=[];
-CSValues=[];
+CSValues{1}='ID';
+CSValues{2}='USER';
+CSValues{3}='INITtime';
+CSValues{4}='time';
+CSValues{5}='song';
+CSValues{6}='melodySlider';
+CSValues{7}='bassDrumsSlider';
+CSValues{8}='hamonicSlider';
+CSValues{9}='melodyOffset';
+CSValues{10}='bassdrumsOffset';
+CSValues{11}='harmonicOffset';
+CSValues{12}='repetitions';
+CSValues{13}='numbChannels';
+CSValues{14}='melodyRelative';
+CSValues{15}='bassDrumsRelative';
+CSValues{16}='harmonicRelative';
+
+%'ID','USER','INITtime','time','song','melodySlider','bassDrumsSlider','hamonicSlider',
+%'melodyOffset','bassdrumsOffset','harmonicOffset','repetitions',
+%'numbChannels','melodyRelative','bassDrumsRelative','harmonicRelative'
 
 for i=1:num_csvFiles;
     % load csv
