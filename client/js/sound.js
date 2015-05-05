@@ -366,13 +366,13 @@ function loadSong(songName) {
 
             // Render HTMl
             var span = document.createElement('tr');
-            span.innerHTML = '<td class="trackBox" style="height : ' + SAMPLE_HEIGHT + 'px"><table width=100%><tr><td width=10%><div align="right">' +
+            span.innerHTML = '<td class="trackBox" style="height : ' + SAMPLE_HEIGHT + 'px"><table width=100%><tr><td width=5%><div align="right">' +
                 //"<progress class='pisteProgress' id='progress" + trackNumber + "' value='0' max='100' style='width : " + SAMPLE_HEIGHT + "px' ></progress>" +
                 instrument.name + '</div></td>' +
                 //"<button class='mute' id='mute" + trackNumber + "' onclick='muteUnmuteTrack(" + trackNumber + ");'><span class='glyphicon glyphicon-volume-up'></span></button> " +
                 //"<button class='solo' id='solo" + trackNumber + "' onclick='soloNosoloTrack(" + trackNumber + ");'><img src='../img/earphones.png' /></button>
-"<td width=80%>" +
-                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='-70' max = '20' value='-70' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
+"<td width=100%>" +
+                "<span id='volspan'><input type='range' class = 'volumeSlider custom' id='volume" + trackNumber + "' min='-70' max = '0' value='-70' oninput='setVolumeOfTrackDependingOnSliderValue(" + trackNumber + ");'/></span></td></tr></table><td>";
 
             divTrack.appendChild(span);
 
