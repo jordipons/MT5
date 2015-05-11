@@ -242,7 +242,7 @@ function drawTrack(decodedBuffer, trackNumber) {
     var trackName = currentSong.tracks[trackNumber].name;
     //trackName = trackName.slice(trackName.lastIndexOf("/")+1, trackName.length-4);
 
-    waveformDrawer.init(decodedBuffer, View.masterCanvas, '#83E83E');
+    waveformDrawer.init(decodedBuffer, View.masterCanvas, '#000000');
     var x = 0;
     var y = trackNumber * SAMPLE_HEIGHT;
     // First parameter = Y position (top left corner)
@@ -513,16 +513,16 @@ function showWelcomeMessage() {
     View.frontCanvasContext.save();
     View.frontCanvasContext.font = '14pt Arial';
     View.frontCanvasContext.fillStyle = 'white';
-    View.frontCanvasContext.fillText('1) Choose an experiment: TRAIN or START TEST!', 50, 200);
-    View.frontCanvasContext.fillText('Other options are for individual evaluation of the test songs.', 50, 225);
-    View.frontCanvasContext.fillText('2) Once the best mix is found, click Save & Next to continue.', 120, 100);
+    //View.frontCanvasContext.fillText('1) Choose an experiment: TRAIN or START TEST!', -50, 200);
+    //View.frontCanvasContext.fillText('Other options are for individual evaluation of the test songs.', -50, 225);
+    //View.frontCanvasContext.fillText('2) Once the best mix is found, click Save & Next to continue.', 120, 100);
     //View.frontCanvasContext.fillText('1) Read the task  written in red  ', 315, 100);
     //View.frontCanvasContext.fillText('at the black box! ', 315, 120);
 
     // Draws an arrow in direction of the drop down menu
     // x1, y1, x2, y2, width of arrow, color
-    drawArrow(View.frontCanvasContext, 160, 170, 10, 10, 10, 'lightGreen');
-    drawArrow(View.frontCanvasContext, 300, 70, 250, 10, 10, 'lightGreen');
+    //drawArrow(View.frontCanvasContext, 160, 170, 10, 10, 10, 'lightGreen');
+    //drawArrow(View.frontCanvasContext, 300, 70, 250, 10, 10, 'lightGreen');
     //drawArrow(View.frontCanvasContext, 450, 80, 450, 10, 10, 'lightGreen');
 
 

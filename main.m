@@ -3,7 +3,7 @@
 
 clc;clear all;close all;
 
-csvPath='./csv/JordiSunday/';
+csvPath='./csv/Test60/';
 
 % ERROR CODE: 100000000
 error_code=100000000;
@@ -51,7 +51,7 @@ for i=1:num_csvFiles;
     fid = fopen(ftoread);
     fgetl(fid);
     fvalues=[];
-    fvalues = textscan(fid, '%f32 %s %s %s %s %f32 %f32 %f32 %f32 %f32 %f32 %f32 %f32', 'Delimiter',','); 
+    fvalues = textscan(fid, '%s %s %s %s %s %f32 %f32 %f32 %f32 %f32 %f32 %f32 %f32', 'Delimiter',','); 
     fclose(fid);
     
     % total contribution
@@ -134,5 +134,7 @@ cell2csv(strcat(d,'.csv'), CSValues, ',')
 % disp(std(relMelody))
 % disp(std(relBassDrums))
 % disp(std(relHarmonic))
+
+num_csvFiles
 
 diary off;
